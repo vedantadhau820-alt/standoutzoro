@@ -360,7 +360,7 @@ async function playAppTone(type) {
             if (activeTone === audio) {
                 stopActiveTone();
             }
-        }, 15000);
+        }, 60000);
 
         return audio;
     } catch (error) {
