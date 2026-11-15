@@ -708,7 +708,7 @@ function buyCard(cardId) {
                 ...latestOwnedCards,
                 [card.id]: {
                     ...(latestOwnedCards[card.id] || {}),
-                    mintedAt: window.getISTDate().toISOString().slice(0, 10)
+                    mintedAt: getISTTodayKey()
                 }
             };
 
@@ -752,8 +752,13 @@ function buyCard(cardId) {
 
 function formatDate(isoDate) {
     if (!isoDate) return "";
-    const d = new Date(isoDate);
-    return d.toLocaleDateString([], {
+
+    const parsed = parseDateKey(isoDate);
+
+    if (!parsed) return isoDate;
+
+    return parsed.toLocaleDateString("en-IN", {
+        timeZone: "UTC",
         day: "numeric",
         month: "short",
         year: "numeric"
